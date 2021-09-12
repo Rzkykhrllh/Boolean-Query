@@ -34,9 +34,7 @@ def InvertedIndex(query):
   print()
 
 
-
-
-  #Opearsi Query
+  #Operasi Query
   output_list = query_result[0]
   print(output_list)
 
@@ -54,7 +52,7 @@ def InvertedIndex(query):
     print(output_list)
   
   print()
-  print(printTitleInverted(output_list)) #jangan di method
+  return printTitleInverted(output_list)
   
 # And Function
 def InvertedAnd(set1, set2):
@@ -79,5 +77,5 @@ def printTitleInverted(myList):
   
   return title
 
-InvertedIndex("jogja") # PANGGIL FUNGSI INI ENTAR BUAT INVERTED MATRIX
+#InvertedIndex("jogja") # PANGGIL FUNGSI INI ENTAR BUAT INVERTED MATRIX
 

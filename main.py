@@ -1,52 +1,43 @@
 from term_document_matrix import TermDocumentMatrix
+from inverted_index import InvertedIndex
 import tkinter as tk
 
 FONT = ("Helvetica",16) 
+INVERTED_INDEX_CODE= 1
+TDM_CODE = 2
 
 class KompasArticleFinderApp:    
     
     def __init__(self,root):
         self.root = root
         self.root.minsize(600,600)
-        
-    def search(self,text):
-        #print(str(TermDocumentMatrix(text)))
-        #return text
-        print(text)
       
-   
-#    def ui_main(self):
-#        frame = tk.Frame(self.root)
-#        frame.place(relx=.5,rely=.5,anchor=tk.CENTER)
-        
-#        tk.Label(frame,name="title", text = "Kompas Article Finder", font=FONT).pack(side = tk.TOP,pady=20,padx=5)
-#       tk.Button(frame,name="btn_search",text="Search",command=self.do_something).pack(side = tk.RIGHT)
-#        tk.Entry(frame,width=50,name="search_box").pack(side = tk.RIGHT,padx=10)
-#        self.root.mainloop()
-
-    
     def ui_search_result(self):
-        frame = tk.Frame(self.root)
-        frame.place(relx=0.05,rely=0.1,anchor=tk.NW)
-                
+        var = tk.IntVar()
+        var.set(1)
+        tk.Radiobutton(self.root,text="Inverted Index",variable = var,value=INVERTED_INDEX_CODE).place(x=20,y=20)
+        tk.Radiobutton(self.root,text="Term document Matrix",variable = var,value=TDM_CODE).place(x=120,y=20)
+               
+        scrollbar = tk.Scrollbar(self.root)
+        scrollbar.pack( side = tk.RIGHT, fill = 'y' )
+
+        list_result = tk.Text(self.root, yscrollcommand = scrollbar.set )
+        list_result.place(x=20,y=90,relwidth=0.9,relheight=0.9 )  
+        #list_result.pack(fill='x',expand=True,padx=10)
+        
         search_entry = tk.Entry(self.root,width=50,name="search_box")
         search_entry.place(x=20,y=50)
         
-        search_result = tk.Label(self.root,text="helloskjdnfksjndf")
-        search_result.place(x=20,y=90)       
-        
-        btn_search = tk.Button(self.root,text="Search",command= lambda: search_result.config(text=search_entry.get()))
+        #search_result = tk.Label(self.root,text="",justify=tk.LEFT)
+        #search_result.place(x=20,y=90)       
+       
+        btn_search = tk.Button(self.root,text="Search",command= lambda: (
+            #search_result.config(text= InvertedIndex(str(search_entry.get()).lower()) if var.get()==INVERTED_INDEX_CODE else TermDocumentMatrix(str(search_entry.get()).lower()))
+            list_result.insert(tk.END,InvertedIndex(str(search_entry.get()).lower()) if var.get()==INVERTED_INDEX_CODE else TermDocumentMatrix(str(search_entry.get()).lower()))                
+        ))
         btn_search.place(x=330,y=45)
         
-        var = tk.IntVar()
-        tk.Radiobutton(self.root,text="Inverted Index",variable = var,value=1).place(x=20,y=20)
-        tk.Radiobutton(self.root,text="Term document Matrix",variable = var,value=2).place(x=120,y=20)
-        
-        self.root.mainloop()
-    
-    def do_something(self):
-        print("")
-    
+        self.root.mainloop()  
 
 app = KompasArticleFinderApp(tk.Tk(screenName=None,baseName=None,className='Kelompok 1 - Boolean Retrieval',useTk=1))
 app.ui_search_result()

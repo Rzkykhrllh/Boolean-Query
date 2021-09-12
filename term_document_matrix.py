@@ -43,9 +43,9 @@ def printTitleTDM(list):
 
   return title
 
-def TDMBooleanOpeation(list):
+def TDMBooleanOperation(list):
   output_list = list[0]
-  print(output_list)
+  #print(output_list)
 
   for i in range(0,len(aon_list)):
     if (aon_list[i]=="and"):
@@ -58,10 +58,10 @@ def TDMBooleanOpeation(list):
       # print("NOT")
       output_list = TDMNot(output_list, list[i+1])
     
-    print(output_list)
+    #print(output_list)
   
-  print()
-  print(printTitleTDM(output_list)) #jangan dikomen
+  #print()
+  return printTitleTDM(output_list) #jangan dikomen
 
 def TermDocumentMatrix(query):
   SplitInput(query)
@@ -77,7 +77,6 @@ def TermDocumentMatrix(query):
     i=0
     found=False
     print("query term : ", query_term)
-
     for term in token:
 
       if (term == query_term):
@@ -100,8 +99,7 @@ def TermDocumentMatrix(query):
     else:
       term_vector.append(matrix[indexOfTerm])
 
+  #print(term_vector)
+  return TDMBooleanOperation(term_vector)
 
-  print(term_vector)
-
-  TDMBooleanOpeation(term_vector)
-
+#TermDocumentMatrix("Kota or jogjakarta")
