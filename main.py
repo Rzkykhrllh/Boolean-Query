@@ -23,16 +23,12 @@ class KompasArticleFinderApp:
 
         list_result = tk.Text(self.root, yscrollcommand = scrollbar.set )
         list_result.place(x=20,y=90,relwidth=0.9,relheight=0.9 )  
-        #list_result.pack(fill='x',expand=True,padx=10)
+    
         
         search_entry = tk.Entry(self.root,width=50,name="search_box")
         search_entry.place(x=20,y=50)
-        
-        #search_result = tk.Label(self.root,text="",justify=tk.LEFT)
-        #search_result.place(x=20,y=90)       
-       
+    
         btn_search = tk.Button(self.root,text="Search",command= lambda: (
-            #search_result.config(text= InvertedIndex(str(search_entry.get()).lower()) if var.get()==INVERTED_INDEX_CODE else TermDocumentMatrix(str(search_entry.get()).lower()))
             list_result.insert(tk.END,InvertedIndex(str(search_entry.get()).lower()) if var.get()==INVERTED_INDEX_CODE else TermDocumentMatrix(str(search_entry.get()).lower()))                
         ))
         btn_search.place(x=330,y=45)
